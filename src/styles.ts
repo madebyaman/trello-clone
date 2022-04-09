@@ -32,7 +32,7 @@ export const CardContainer = styled.div`
   padding: 0.5rem 1rem;
   max-width: 300px;
   border-radius: 3px;
-  box-shadow: #091e42 0px 1px 0px 0px;
+  box-shadow: #091e4240 0px 1px 0px 0px;
 `;
 
 type AddItemButtonProps = {
@@ -40,7 +40,8 @@ type AddItemButtonProps = {
 };
 
 export const AddItemButton = styled.button<AddItemButtonProps>`
-  background-color: rgb(68, 145, 197);
+  background-color: ${(props) =>
+    props.dark ? 'transparent' : 'rgb(68, 145, 197)'};
   border-radius: 3px;
   border: none;
   color: ${(props) => (props.dark ? '#000' : '#fff')};
@@ -51,7 +52,8 @@ export const AddItemButton = styled.button<AddItemButtonProps>`
   transition: background 85ms ease-in;
   width: 100%;
   &:hover {
-    background-color: rgb(83, 154, 202);
+    background-color: ${(props) =>
+      props.dark ? 'rgb(215, 217, 222)' : 'rgb(83, 154, 202)'};
   }
 `;
 
