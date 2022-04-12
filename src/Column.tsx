@@ -1,5 +1,6 @@
+import { useRef } from 'react';
 import { ColumnContainer, ColumnTitle } from './styles';
-import { FC } from 'react';
+import { useItemDrag } from './utils/useItemDrag';
 import { AddNewItem } from './AddNewItem';
 import { useAppState } from './state/AppStateContext';
 import { Card } from './Card';
@@ -11,12 +12,17 @@ type ColumnProps = {
   id: string;
 };
 
-export const Column: FC<ColumnProps> = ({ id, text, children }) => {
+export const Column = ({ id, text, children }: ColumnProps) => {
   const { getTasksByListId, dispatch } = useAppState();
   const tasks = getTasksByListId(id);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const { drag } = useItemDrag({ type: 'COLUMN', id, text });
+
+  drag(ref);
 
   return (
-    <ColumnContainer>
+    <ColumnContainer ref={ref}>
       <ColumnTitle>{text}</ColumnTitle>
       {children}
       {tasks.map((task) => (
